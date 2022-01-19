@@ -20,7 +20,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 			print("Error setting AVAudioSession Category", error.localizedDescription)
 		}
         
-//		print("Simulator Directory: \(NSHomeDirectory())")
+		print("Simulator Directory: \(NSHomeDirectory())")
 		
         return true
     }

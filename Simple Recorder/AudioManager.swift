@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import SwiftUI
 
 class AudioManager: NSObject, ObservableObject {
 	
@@ -23,18 +24,14 @@ class AudioManager: NSObject, ObservableObject {
 	
 	@Published var playFromSpeechSynthesizer = false
 	var speechSynthesizer = AVSpeechSynthesizer()
-	@Published var textToSpeak: String = "Hello there"
+	@AppStorage("textToSpeak") var textToSpeak: String = "Hello there"
 	@Published var speechPitch: Float = 1.0
 	@Published var speechRate: Float = AVSpeechUtteranceDefaultSpeechRate
 	
 	@Published var recordingStatus: RecordingState = .stopped
 	@Published var time = "00:00:00"
 	
-	var tempUrl: URL {
-		let url = FileManager.default.temporaryDirectory
-		let filename = "Temp.caf"
-		return url.appendingPathComponent(filename)
-	}
+	var previousRecordingUrl: URL?
 	
 	override init() {
 		super.init()
@@ -97,7 +94,7 @@ class AudioManager: NSObject, ObservableObject {
 	}
 	
 	func prepareEngine() {
-		let format = audioEngine.outputNode.inputFormat(forBus: 0)
+		let format = audioEngine.outputNode.inputFormat(forBus: 0) // Something is fishy
 		print(format.sampleRate)
 		print(AVAudioSession.sharedInstance().sampleRate)
 		audioEngine.attach(audioEnginePlayer)
@@ -111,7 +108,7 @@ class AudioManager: NSObject, ObservableObject {
 		pitchShift.pitch = 0.0
 		reverb.wetDryMix = 50
 
-			audioEngine.prepare()
+		audioEngine.prepare()
 		print("AudioEngine is prepare to start")
 	}
 	
@@ -132,15 +129,16 @@ class AudioManager: NSObject, ObservableObject {
 			AVEncoderAudioQualityKey : AVAudioQuality.high.rawValue
 		]
 		do {
-			try audioRecorder = AVAudioRecorder(url: tempUrl, settings: settings)
+			try audioRecorder = AVAudioRecorder(url: generateFileUrl(), settings: settings)
 			audioRecorder?.delegate = self
 		} catch {
 			print("Error creating audio recorder with format: \(error.localizedDescription)")
 		}
-		
 	}
 	
 	func record() {
+		setupRecorder()
+		
 		if let recorder = audioRecorder {
 			recorder.record()
 		}
@@ -171,7 +169,7 @@ class AudioManager: NSObject, ObservableObject {
 		} else {
 			print("play() 1. Engine running? ", audioEngine.isRunning)
 			do {
-				fileToPlay = try AVAudioFile(forReading: tempUrl)
+				fileToPlay = try AVAudioFile(forReading: previousRecordingUrl!)
 			} catch {
 				print("Error Loading Audio File as AVAudioFile")
 			}
@@ -180,7 +178,7 @@ class AudioManager: NSObject, ObservableObject {
 			audioEnginePlayer.scheduleFile(fileToPlay!, at: nil, completionHandler: nil)
 			
 			do {
-				try audioPlayer = AVAudioPlayer(contentsOf: tempUrl)
+				try audioPlayer = AVAudioPlayer(contentsOf: previousRecordingUrl!)
 				audioPlayer?.delegate = self
 			} catch {
 				print("Error loading audio file from temp directory")
@@ -250,6 +248,64 @@ class AudioManager: NSObject, ObservableObject {
 		return String(format: "%02i:%02i:%02i", hour, minute, seconds)
 	}
 	
+	private func generateFileUrl() -> URL {
+		var url = previousRecordingUrl ?? documentFolderUrl
+		
+		do {
+			let documentDirectory = try FileManager.default.url(for: .documentDirectory,
+																   in: .userDomainMask,
+																   appropriateFor: nil,
+																   create: false)
+			let formatter = DateFormatter()
+			formatter.dateFormat = "MM-dd-yyyy_HH-mm-ss"
+			
+			let time = formatter.string(from: Date())
+			
+			url = documentDirectory.appendingPathComponent("Recording_" + time + ".caf", isDirectory: false)
+			
+			print(url)
+		} catch {
+			print(error.localizedDescription)
+		}
+		
+		previousRecordingUrl = url
+		
+		return url
+	}
+	
+	var documentFolderUrl: URL {
+		FileManager.default.urls(for: .documentDirectory,
+							     in: .userDomainMask)[0]
+	}
+	
+	var recordedFileNames: [String] {
+		var contents: [String] = []
+		do {
+			let contentsOfDocument = try FileManager.default.contentsOfDirectory(atPath: documentFolderUrl.path)
+			for path in contentsOfDocument {
+				if path.hasSuffix(".caf") {
+					contents.append(path)
+				}
+			}
+		} catch {
+			print("Error loading document folder")
+		}
+//		documentFolderUrl.map { $0.lastPathComponent }
+		return contents
+	}
+	
+	func playFile(named name: String) {
+		stop()
+		let temp = previousRecordingUrl
+		previousRecordingUrl = documentFolderUrl.appendingPathComponent(name, isDirectory: false)
+		play()
+		previousRecordingUrl = temp
+	}
+	
+	func deleteFile(at offsets: IndexSet) {
+		
+	}
+	
 }
 
 extension AudioManager: AVAudioRecorderDelegate {
@@ -271,7 +327,7 @@ extension AudioManager: AVSpeechSynthesizerDelegate {
 	}
 	
 	func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
-		recordingStatus = .playing
+		recordingStatus = .playingSpeech
 	}
 	
 	func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {

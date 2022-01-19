@@ -10,6 +10,7 @@ import AVFAudio
 
 struct RecorderView: View {
 	@ObservedObject var audioManager = AudioManager()
+	@AppStorage("textToSpeak") var textToSpeak: String = "Hello there"
 	@State var requestPermission: Bool = false
 	@State var permissionGranted: Bool = false
 	
@@ -17,7 +18,6 @@ struct RecorderView: View {
 		TabView {
 			// MARK: - Play Tab
 			VStack {
-				
 				Spacer()
 				
 				if !audioManager.playFromSpeechSynthesizer {
@@ -42,8 +42,8 @@ struct RecorderView: View {
 					}
 				} else {
 					if #available(iOS 15.0, *) {
-						TextEditor(text: $audioManager.textToSpeak)
-							.frame(maxHeight: 200)
+						TextEditor(text: $textToSpeak)
+							.frame(maxHeight: 250)
 							.cornerRadius(10)
 							.shadow(radius: 10)
 							.padding()
@@ -53,39 +53,42 @@ struct RecorderView: View {
 				}
 				
 				// Play
-				Button {
-					if audioManager.recordingStatus == .stopped {
-						print("current status: stopped. Will play recorded audio")
-						audioManager.play()
-					} else if audioManager.recordingStatus == .playing {
-						print("current status: playing. Will stop playing")
-						audioManager.stopPlayback()
-					} else { 								// recording
-						print("current status: recoding. Will stop recording and play")
-						audioManager.stop()
-						audioManager.play()
+				if audioManager.previousRecordingUrl != nil {
+					Button {
+						if audioManager.recordingStatus == .stopped {
+							print("current status: stopped. Will play recorded audio")
+							audioManager.play()
+						} else if audioManager.recordingStatus == .playing {
+							print("current status: playing. Will stop playing")
+							audioManager.stopPlayback()
+						} else { 								// recording
+							print("current status: recoding. Will stop recording and play")
+							audioManager.stop()
+							audioManager.play()
+						}
+					} label: {
+						Image(systemName: audioManager.recordingStatus == .playing ||
+							  audioManager.recordingStatus == .playingSpeech ?
+							  "stop.circle":
+								"play.circle")
+							.resizable()
+							.aspectRatio(contentMode: .fit)
+							.frame(width: 100, height: 100)
+							.padding()
 					}
-				} label: {
-					Image(systemName: audioManager.recordingStatus == .playing ?
-						  "stop.circle":
-							"play.circle")
-						.resizable()
-						.aspectRatio(contentMode: .fit)
-						.frame(width: 100, height: 100)
-						.padding()
 				}
 				
 				Spacer()
 				
-				if audioManager.recordingStatus != .stopped {
+				if audioManager.recordingStatus == .recording ||
+				   audioManager.recordingStatus == .playing {
 					Text(audioManager.time)
 						.font(.custom("courier", size: 18))
 						.bold()
 				}
 				
-				Toggle("Play from Speech Synthesizer", isOn: $audioManager.playFromSpeechSynthesizer)
-				.padding()
-				.padding(.bottom, 50)
+				Toggle("Speech Synthesizer", isOn: $audioManager.playFromSpeechSynthesizer)
+				.padding(80)
 			}
 			.alert(isPresented: $requestPermission) {
 				Alert(title: Text("Permission Denied"),
@@ -100,6 +103,28 @@ struct RecorderView: View {
 			}
 			.tag(0)
 			
+			// MARK: - Files Tab
+			List {
+				ForEach (audioManager.recordedFileNames, id: \.self) { name in
+					Button {
+						audioManager.playFile(named: name)
+					} label: {
+						Text(name)
+					}
+				}
+				.onDelete { indexSet in
+					audioManager.deleteFile(at: indexSet)
+				}
+				
+				
+			}
+			.tabItem {
+				VStack {
+					Image(systemName: "folder")
+					Text("Recordings")
+				}
+			}
+			.tag(1)
 
 			// MARK: - Settings Tab
 			List {
@@ -145,12 +170,12 @@ struct RecorderView: View {
 					Text("Settings")
 				}
 			}
-			.tag(1)
+			.tag(2)
 		}
 		.accentColor(.red)
 		.foregroundColor(.red)
 		.onAppear {
-			audioManager.setupRecorder()
+//			audioManager.setupRecorder()
 			audioManager.prepareEngine()
 		}
     }

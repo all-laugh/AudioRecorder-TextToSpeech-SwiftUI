@@ -11,10 +11,11 @@ enum RecordingState: Int, CustomStringConvertible {
 	case recording,
 		 paused,
 		 stopped,
-		 playing
+		 playing,
+		 playingSpeech
 	
 	var stateName: String {
-		let states = ["Audio: Recording", "Audio: Paused", "Audio: Stopped", "Audio: Playing"]
+		let states = ["Audio: Recording", "Audio: Paused", "Audio: Stopped", "Audio: Playing", "Audio: Playing Speech"]
 		
 		return states[self.rawValue]
 	}
