@@ -7,16 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5098A60E27973F0200F608A7 /* LearningAVFoundationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5098A60D27973F0200F608A7 /* LearningAVFoundationApp.swift */; };
-		5098A61027973F0200F608A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5098A60F27973F0200F608A7 /* ContentView.swift */; };
+		506F85F22797450A00EF20AB /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F85F12797450A00EF20AB /* AudioManager.swift */; };
+		506F85F427975B3A00EF20AB /* RecordingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F85F327975B3A00EF20AB /* RecordingState.swift */; };
+		5098A60E27973F0200F608A7 /* SimpleRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5098A60D27973F0200F608A7 /* SimpleRecorder.swift */; };
+		5098A61027973F0200F608A7 /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5098A60F27973F0200F608A7 /* RecorderView.swift */; };
 		5098A61227973F0300F608A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5098A61127973F0300F608A7 /* Assets.xcassets */; };
 		5098A61527973F0300F608A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5098A61427973F0300F608A7 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5098A60A27973F0200F608A7 /* LearningAVFoundation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearningAVFoundation.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5098A60D27973F0200F608A7 /* LearningAVFoundationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningAVFoundationApp.swift; sourceTree = "<group>"; };
-		5098A60F27973F0200F608A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		506F85F12797450A00EF20AB /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		506F85F327975B3A00EF20AB /* RecordingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingState.swift; sourceTree = "<group>"; };
+		5098A60A27973F0200F608A7 /* Simple Recorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simple Recorder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5098A60D27973F0200F608A7 /* SimpleRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRecorder.swift; sourceTree = "<group>"; };
+		5098A60F27973F0200F608A7 /* RecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
 		5098A61127973F0300F608A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5098A61427973F0300F608A7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -35,7 +39,7 @@
 		5098A60127973F0200F608A7 = {
 			isa = PBXGroup;
 			children = (
-				5098A60C27973F0200F608A7 /* LearningAVFoundation */,
+				5098A60C27973F0200F608A7 /* Simple Recorder */,
 				5098A60B27973F0200F608A7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,20 +47,22 @@
 		5098A60B27973F0200F608A7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5098A60A27973F0200F608A7 /* LearningAVFoundation.app */,
+				5098A60A27973F0200F608A7 /* Simple Recorder.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5098A60C27973F0200F608A7 /* LearningAVFoundation */ = {
+		5098A60C27973F0200F608A7 /* Simple Recorder */ = {
 			isa = PBXGroup;
 			children = (
-				5098A60D27973F0200F608A7 /* LearningAVFoundationApp.swift */,
-				5098A60F27973F0200F608A7 /* ContentView.swift */,
+				5098A60D27973F0200F608A7 /* SimpleRecorder.swift */,
+				506F85F12797450A00EF20AB /* AudioManager.swift */,
+				506F85F327975B3A00EF20AB /* RecordingState.swift */,
+				5098A60F27973F0200F608A7 /* RecorderView.swift */,
 				5098A61127973F0300F608A7 /* Assets.xcassets */,
 				5098A61327973F0300F608A7 /* Preview Content */,
 			);
-			path = LearningAVFoundation;
+			path = "Simple Recorder";
 			sourceTree = "<group>";
 		};
 		5098A61327973F0300F608A7 /* Preview Content */ = {
@@ -70,9 +76,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5098A60927973F0200F608A7 /* LearningAVFoundation */ = {
+		5098A60927973F0200F608A7 /* Simple Recorder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5098A61827973F0300F608A7 /* Build configuration list for PBXNativeTarget "LearningAVFoundation" */;
+			buildConfigurationList = 5098A61827973F0300F608A7 /* Build configuration list for PBXNativeTarget "Simple Recorder" */;
 			buildPhases = (
 				5098A60627973F0200F608A7 /* Sources */,
 				5098A60727973F0200F608A7 /* Frameworks */,
@@ -82,9 +88,9 @@
 			);
 			dependencies = (
 			);
-			name = LearningAVFoundation;
+			name = "Simple Recorder";
 			productName = LearningAVFoundation;
-			productReference = 5098A60A27973F0200F608A7 /* LearningAVFoundation.app */;
+			productReference = 5098A60A27973F0200F608A7 /* Simple Recorder.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +108,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5098A60527973F0200F608A7 /* Build configuration list for PBXProject "LearningAVFoundation" */;
+			buildConfigurationList = 5098A60527973F0200F608A7 /* Build configuration list for PBXProject "Simple Recorder" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -115,7 +121,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5098A60927973F0200F608A7 /* LearningAVFoundation */,
+				5098A60927973F0200F608A7 /* Simple Recorder */,
 			);
 		};
 /* End PBXProject section */
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5098A61027973F0200F608A7 /* ContentView.swift in Sources */,
-				5098A60E27973F0200F608A7 /* LearningAVFoundationApp.swift in Sources */,
+				5098A61027973F0200F608A7 /* RecorderView.swift in Sources */,
+				506F85F427975B3A00EF20AB /* RecordingState.swift in Sources */,
+				5098A60E27973F0200F608A7 /* SimpleRecorder.swift in Sources */,
+				506F85F22797450A00EF20AB /* AudioManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,7 +204,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -251,7 +259,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -268,21 +276,23 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"LearningAVFoundation/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Simple Recorder/Preview Content\"";
 				DEVELOPMENT_TEAM = XDPTRV2722;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app uses the device to record audio.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ninja.xquan.LearningAVFoundation;
+				PRODUCT_BUNDLE_IDENTIFIER = ninja.xquan.MDX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -297,21 +307,23 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"LearningAVFoundation/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Simple Recorder/Preview Content\"";
 				DEVELOPMENT_TEAM = XDPTRV2722;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app uses the device to record audio.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ninja.xquan.LearningAVFoundation;
+				PRODUCT_BUNDLE_IDENTIFIER = ninja.xquan.MDX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -322,7 +334,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5098A60527973F0200F608A7 /* Build configuration list for PBXProject "LearningAVFoundation" */ = {
+		5098A60527973F0200F608A7 /* Build configuration list for PBXProject "Simple Recorder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5098A61627973F0300F608A7 /* Debug */,
@@ -331,7 +343,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5098A61827973F0300F608A7 /* Build configuration list for PBXNativeTarget "LearningAVFoundation" */ = {
+		5098A61827973F0300F608A7 /* Build configuration list for PBXNativeTarget "Simple Recorder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5098A61927973F0300F608A7 /* Debug */,
