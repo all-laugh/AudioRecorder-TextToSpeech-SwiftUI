@@ -13,21 +13,20 @@ Hacked in a day while learning more about AVFoundation.
 - Change the pitch and reverb dry/wet of normal recordings in real-time during playback
 - View and play recorded file in a separate tab
 
-<img src="images/1.png" width="300"/>
 interface
+<img src="images/1.png" width="300"/>
 
-<img src="images/3.png" width="300"/>
 recording
+<img src="images/3.png" width="300"/>
 
-<img src="images/5.png" width="300"/>
 recorded files, tap to play
+<img src="images/5.png" width="300"/>
 
-<img src="images/4.png" width="300"/>
 speech synthesizer
+<img src="images/4.png" width="300"/>
 
-<img src="images/6.png" width="300"/>
 settings page
-
+<img src="images/6.png" width="300"/>
 
 ### Cannot:
 
