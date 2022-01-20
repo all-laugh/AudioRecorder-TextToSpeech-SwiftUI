@@ -40,6 +40,8 @@ class AudioManager: NSObject, ObservableObject {
 		notificationCenter.addObserver(self, selector: #selector(handleInteruption), name: AVAudioSession.interruptionNotification, object: nil)
 		notificationCenter.addObserver(self, selector: #selector(handleAEChange), name: .AVAudioEngineConfigurationChange, object: nil)
 		speechSynthesizer.delegate = self
+		
+		loadFileNames()
 	}
 	
 	deinit {
@@ -278,20 +280,15 @@ class AudioManager: NSObject, ObservableObject {
 							     in: .userDomainMask)[0]
 	}
 	
-	var recordedFileNames: [String] {
-		var contents: [String] = []
+	@Published var recordedFileNames: [String] = []
+	
+	private func loadFileNames() {
 		do {
-			let contentsOfDocument = try FileManager.default.contentsOfDirectory(atPath: documentFolderUrl.path)
-			for path in contentsOfDocument {
-				if path.hasSuffix(".caf") {
-					contents.append(path)
-				}
-			}
+			recordedFileNames = try FileManager.default.contentsOfDirectory(atPath: documentFolderUrl.path).filter { $0.hasSuffix(".caf") }
+			print("Loaded: ", recordedFileNames)
 		} catch {
 			print("Error loading document folder")
 		}
-//		documentFolderUrl.map { $0.lastPathComponent }
-		return contents
 	}
 	
 	func playFile(named name: String) {
@@ -308,11 +305,12 @@ class AudioManager: NSObject, ObservableObject {
 //		filenames.remove(atOffsets: offsets)
 		if let indexToDelete = offsets.min() {
 			let filename = recordedFileNames[indexToDelete]
-			print(filename)
+			print("Deleting: ", filename)
 			let url = documentFolderUrl.appendingPathComponent(filename, isDirectory: false)
-			print(url.path)
+//			print(url.path)
 			try? FileManager.default.removeItem(at: url)
 		}
+		loadFileNames()
 	}
 	
 }
@@ -320,6 +318,7 @@ class AudioManager: NSObject, ObservableObject {
 extension AudioManager: AVAudioRecorderDelegate {
 	func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
 		recordingStatus = .stopped
+		loadFileNames()
 	}
 }
 
