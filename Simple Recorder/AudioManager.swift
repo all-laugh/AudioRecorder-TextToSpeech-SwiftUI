@@ -303,7 +303,16 @@ class AudioManager: NSObject, ObservableObject {
 	}
 	
 	func deleteFile(at offsets: IndexSet) {
-		
+//		var filenames = recordedFileNames
+//		print("DELETE offsets? -> \(offsets.min())")
+//		filenames.remove(atOffsets: offsets)
+		if let indexToDelete = offsets.min() {
+			let filename = recordedFileNames[indexToDelete]
+			print(filename)
+			let url = documentFolderUrl.appendingPathComponent(filename, isDirectory: false)
+			print(url.path)
+			try? FileManager.default.removeItem(at: url)
+		}
 	}
 	
 }
