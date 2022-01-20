@@ -32,11 +32,7 @@ settings page
 ### Cannot:
 
 - alter speech synth speed/pitch in real-time
-- delete files...
-
 
 ### Future work (probably in a another project): 
 
 - refactor the heck out
-- add delete functionality
-- improve playback experience while in "Recordings" tab. There are some bugs...
