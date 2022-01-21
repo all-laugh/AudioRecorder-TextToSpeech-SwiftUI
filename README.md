@@ -12,6 +12,7 @@ Hacked in a day while learning more about AVFoundation.
 - Change the pitch and speed of the speech synthesizer in settings
 - Change the pitch and reverb dry/wet of normal recordings in real-time during playback
 - View and play recorded file in a separate tab
+- Delete recorded files
 
 interface
 
@@ -36,11 +37,9 @@ settings page
 ### Cannot:
 
 - alter speech synth speed/pitch in real-time
-- delete files...
 
 
 ### Future work (probably in a another project): 
 
 - refactor the heck out
-- add delete functionality
-- improve playback experience while in "Recordings" tab. There are some bugs...
+- nice to support recording in different formats/samplerates
