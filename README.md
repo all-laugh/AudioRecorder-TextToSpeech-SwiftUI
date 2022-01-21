@@ -13,6 +13,7 @@ Hacked in a day while learning more about AVFoundation.
 - Change the pitch and reverb dry/wet of normal recordings in real-time during playback
 - View and play recorded file in a separate tab
 - Delete recorded files
+- Handle audio route changes or app state changes accordingly using AVAudioSession and notification observers
 
 interface
 
