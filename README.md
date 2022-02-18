@@ -12,22 +12,28 @@ Hacked in a day while learning more about AVFoundation.
 - Change the pitch and speed of the speech synthesizer in settings
 - Change the pitch and reverb dry/wet of normal recordings in real-time during playback
 - View and play recorded file in a separate tab
+- Delete recorded files
+- Handle audio route changes or app state changes accordingly using AVAudioSession and notification observers
 
-<img src="images/1.png" width="300"/>
 interface
 
-<img src="images/3.png" width="300"/>
+<img src="images/1.png" width="400"/>
+
 recording
 
-<img src="images/5.png" width="300"/>
+<img src="images/3.png" width="400"/>
+
 recorded files, tap to play
 
-<img src="images/4.png" width="300"/>
+<img src="images/5.png" width="400"/>
+
 speech synthesizer
 
-<img src="images/6.png" width="300"/>
+<img src="images/4.png" width="400"/>
+
 settings page
 
+<img src="images/6.png" width="400"/>
 
 ### Cannot:
 
@@ -36,3 +42,4 @@ settings page
 ### Future work (probably in a another project): 
 
 - refactor the heck out
+- nice to support recording in different formats/samplerates
